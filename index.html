@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Tracking</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header class="container" >
+    Selamat Datang
+    <p1 id="date"></p1>
+    <p2 id="time"></p2>
+    </header>
+    <main>
+        <aside class="navbar-container">
+            <p1> Pengunjung Masuk</p1>
+            <div class="numeric-display" id="inDisplay">----</div>
+            <p1> Pengunjung Keluar</p1>
+            <div class="numeric-display" id="outDisplay">----</div>
+            <p1> Jumlah Pengunjung</p1>
+            <div class="numeric-display" id="occupancyDisplay">----</div>
+            <div id="saveStatus"></div>
+            <div class="container"><button onclick="openModal()">Simpan data pengunjung</button></div>
+            <div id="timeRangeModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Waktu</h2>
+                    <label for="startDate">Awal:</label>
+                    <input type="date" id="startDate"><br><br>
+                    <label for="endDate">Akhir:</label>
+                    <input type="date" id="endDate"><br><br>
+                    <button onclick="saveOccupancyData()">Simpan Data</button>
+            </div>
+        </aside>
+        <div id="berandaSection">
+            <div class="card-group">    
+                <article class="card">
+                    <h3 id="Entry Count">Pengunjung Masuk</h3>
+                    <p id="Entry"></p>
+                    <canvas id="entryChart"></canvas>
+                </article>
+                <article class="card">
+                    <h3 id="Exit Count">Pengunjung Keluar</h3>
+                    <p id="Exit"></p>
+                    <canvas id="exitChart"></canvas>
+                </article>
+                <article class="card">
+                    <h3 id="Total Occupancy">Jumlah Pengunjung</h3>
+                    <p id="Total"></p>
+                    <canvas id="occupantChart"></canvas>
+                </article>
+                <article class="card">
+                    <div>
+                    <h3>Alarm</h3>
+                    <div class="light-container">
+                    <div id="indicator-light" class="indicator-light"></div>
+                    <audio id="alertSound" src="alarm.ogg"></audio>
+                    </div>
+                    <div id="timestamp" class="timestamp"></div>
+                    <button onclick="openSetupPopup()" class="settings-btn">⚙️</button>
+                </div>
+                
+                <div id="setup-popup" class="setup-popup">
+                    <div class="popup-content">
+                    <h2>Alert Options <span class="close-btn" onclick="closeSetupPopup()">×</span></h2>
+                    
+                    <label for="condition">Jika</label>
+                    <select id="condition">
+                        <option value="greater">Jumlah pengunjung lebih besar</option>
+                        <option value="less">Jumlah pengunjung lebih kurang</option>
+                        <option value="equal">Jumlah pengunjung sama dengan</option>
+                        <option value="greater or equal to'">Jumlah pengunjung lebih besar atau sama dengan</option>
+                        <option value="less or equal to">Jumlah pengunjung lebih kurang atau sama dengan</option>
+                    </select>
+                    
+                    <label for="threshold">Batas maksimum</label>
+                    <input type="number" id="threshold">
+                    <br/>
+                    <label for="interval">Interval pembaruan (detik)</label>
+                    <input type="number" id="interval" min="1" value="5">
+                    <br/>
+                    <label for="color">Warna</label>
+                    <input type="color" id="color" value="#ff0000">
+                    <br/>
+                    <label for="enableAudio">
+                        <input type="checkbox" id="enableAudio">
+                        Suara alarm
+                    </label>
+                    
+                    <div class="button-group">
+                        <button onclick="saveSettings()">Simpan</button>
+                        <button onclick="closeSetupPopup()">Batal</button>
+                    </div>
+                    </div>
+                </div>
+                </article>                                 
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="script/script.js"></script>
+    <script src="https://kit.fontawesome.com/1e414f1c8f.js" crossorigin="anonymous"></script>
+    
+<body>
+</html>
